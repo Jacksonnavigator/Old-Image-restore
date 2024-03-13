@@ -1,15 +1,11 @@
 import streamlit as st
 from PIL import Image
-import requests
-from io import BytesIO
+from deoldify import device
+from deoldify.device_id import DeviceId
+from deoldify.visualize import *
 
-# Function to colorize the image
-def colorize_image(image):
-    # Your colorization code here
-    # You can use a pre-trained model like DeOldify
-    # Example:
-    # colorized_image = colorize_with_deoldify(image)
-    return image  # Placeholder for now
+# Set device
+device.set(device=DeviceId.GPU0)
 
 # Streamlit app
 def main():
@@ -28,7 +24,9 @@ def main():
         if st.button("Colorize"):
             with st.spinner("Colorizing..."):
                 # Colorize the image
-                colorized_image = colorize_image(image)
+                colorizer = get_image_colorizer(artistic=True)
+                colorized_image = colorizer.get_transformed_image(image)
+
                 # Display colorized image
                 st.image(colorized_image, caption="Colorized Image", use_column_width=True)
 
