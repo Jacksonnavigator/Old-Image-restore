@@ -1,3 +1,6 @@
+pip install deoldify
+sudo apt install ffmpeg
+
 import streamlit as st
 from PIL import Image
 from deoldify import device
